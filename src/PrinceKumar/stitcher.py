@@ -8,7 +8,8 @@ import numpy as np
 
 class PanaromaStitcher():
     def __init__(self):
-        pass
+        sift = cv2.SIFT_create()
+        matcher = cv2.BFMatcher(cv2.NORM_L2)
 
     def normalize_points(self, pts):
         mean = np.mean(pts, axis=0)
@@ -183,9 +184,6 @@ class PanaromaStitcher():
         Img_list = []
         for i in all_images:
             Img_list.append(cv2.imread(i))
-
-        sift = cv2.SIFT_create()
-        matcher = cv2.BFMatcher(cv2.NORM_L2)
         
         stitched_image = Img_list[0]
         homography_matrix_list =[]
