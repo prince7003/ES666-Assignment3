@@ -8,8 +8,8 @@ import numpy as np
 
 class PanaromaStitcher():
     def __init__(self):
-        sift = cv2.SIFT_create()
-        matcher = cv2.BFMatcher(cv2.NORM_L2)
+        self.sift = cv2.SIFT_create()
+        self.matcher = cv2.BFMatcher(cv2.NORM_L2)
 
     def normalize_points(self, pts):
         mean = np.mean(pts, axis=0)
@@ -190,10 +190,10 @@ class PanaromaStitcher():
 
         
         for i in range(1, len(Img_list)):
-            kp1, des1 = sift.detectAndCompute(stitched_image, None)
-            kp2, des2 = sift.detectAndCompute(Img_list[i], None)
+            kp1, des1 = self.sift.detectAndCompute(stitched_image, None)
+            kp2, des2 = self.sift.detectAndCompute(Img_list[i], None)
 
-            knn_matches = matcher.knnMatch(des1, des2, k=2)
+            knn_matches = self.matcher.knnMatch(des1, des2, k=2)
 
             good_matches = []
             for m, n in knn_matches:
