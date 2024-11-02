@@ -11,12 +11,8 @@ class PanaromaStitcher:
 
     def make_panaroma_for_images_in(self, path):
         image_paths = glob.glob('{}/*.*'.format(path))
-        if len(image_paths) < 2:
-            raise ValueError("Need at least two images to create a panorama")
-
+        
         images = [cv2.imread(im_path) for im_path in image_paths]
-        if any(image is None for image in images):
-            raise ValueError("Error reading one or more images from the path")
 
         stitched_image = images[0]
         homography_matrix_list = []
